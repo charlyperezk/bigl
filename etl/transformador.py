@@ -3,6 +3,7 @@ from herramientas.procesado import Procesador
 import logging
 import json
 
+
 class Transformador:
 
     """
@@ -23,12 +24,14 @@ class Transformador:
         resultados_obtenidos = len(resultados)
         logging.info(f" Se han obtenido {resultados_obtenidos} respuestas ")
         logging.info(" Obteniendo datos de interés ... ")
-        items_procesados = self._procesador._procesar_inmuebles(resultados=resultados)
+        resultados_procesados = self._procesador._procesar_inmuebles(
+            resultados=resultados)
         logging.info(" Los datos se han procesado exitosamente ")
-        return items_procesados
+        return resultados_procesados
 
     def obtener_keys(self, response: json) -> str:
         keys = response.keys()
-        logging.info(" Se han encontrado las siguientes claves en la response: ")
+        logging.info(
+            " Se han encontrado las siguientes claves en la response: ")
         for e, i in enumerate(keys):
-            print (e, "--", i)
+            print(e, "--", i)

@@ -9,7 +9,7 @@ class ClienteMeli:
     Sin atributos
 
     """
-    
+
     def solicitud_get(self, query: str, encabezados: dict) -> Response:
         return requests.get(
             url=query, headers=encabezados)

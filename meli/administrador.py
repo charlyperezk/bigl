@@ -7,6 +7,7 @@ from base.cliente import ClienteBaseDeDatos
 from base.modelos.conexion import Conexion
 from meli.credenciales import Credenciales
 
+
 class AdministradorCredenciales:
 
     """
@@ -23,7 +24,7 @@ class AdministradorCredenciales:
 
     """
 
-    def __init__(self, cliente : ClienteBaseDeDatos) -> None:
+    def __init__(self, cliente: ClienteBaseDeDatos) -> None:
         self._cliente = cliente
         self._credenciales = Credenciales
         self.credenciales_url = "https://api.mercadolibre.com/oauth/token"
@@ -32,46 +33,59 @@ class AdministradorCredenciales:
         conexion = self._cliente.ultimo_registro(object=Conexion)
         access_token = conexion.access_token
         encabezados = {
-                'Authorization': f"Bearer {access_token}"
-            }
+            'Authorization': f"Bearer {access_token}"
+        }
         return encabezados
 
     def supervisar(self) -> None:
         registros = self._cliente.registros(object=Conexion)
         if len(registros) == 0:
-            logging.info(" No se han encontrado registros de credenciales almacenados ")
-            datos, encabezados = self._credenciales.credenciales_conexion(reconexion=False)
+            logging.info(
+                " No se han encontrado registros de credenciales almacenados ")
+            datos, encabezados = self._credenciales.credenciales_conexion(
+                reconexion=False)
             logging.info(" Solicitando credenciales ...")
-            solicitud = self.solicitud_post(datos=datos, encabezados=encabezados)
+            solicitud = self.solicitud_post(
+                datos=datos, encabezados=encabezados)
             if solicitud.status_code == 200:
-                logging.info(" Se han obtenido las nuevas credenciales satisfactoriamente ")
+                logging.info(
+                    " Se han obtenido las nuevas credenciales satisfactoriamente ")
                 access_token = solicitud.json().get("access_token", "")
                 refresh_token = solicitud.json().get("refresh_token", "")
-                conexion = Conexion(refresh_token=refresh_token, access_token=access_token)
+                conexion = Conexion(
+                    refresh_token=refresh_token, access_token=access_token)
                 self._cliente.guardar(object=conexion)
             else:
                 logging.error(" No se han podido obtener las credenciales ")
         else:
             ultimo_registro = self._cliente.ultimo_registro(Conexion)
-            requiere_reconexion = self._credenciales.control_umbral(object=ultimo_registro)
-            if requiere_reconexion == True: 
+            requiere_reconexion = self._credenciales.control_umbral(
+                object=ultimo_registro)
+            if requiere_reconexion == True:
                 refresh_token = ultimo_registro.refresh_token
-                logging.info(" El último registro localizado requiere reconexion ")
-                datos, encabezados = self._credenciales.credenciales_conexion(reconexion=True)
+                logging.info(
+                    " El último registro localizado requiere reconexion ")
+                datos, encabezados = self._credenciales.credenciales_conexion(
+                    reconexion=True)
                 datos["refresh_token"] = refresh_token
                 logging.info(" Reconectando ... ")
-                solicitud = self.solicitud_post(datos=datos, encabezados=encabezados)
+                solicitud = self.solicitud_post(
+                    datos=datos, encabezados=encabezados)
                 if solicitud.status_code == 200:
-                    logging.info(" Se han renovado las credenciales satisfactoriamente ")
+                    logging.info(
+                        " Se han renovado las credenciales satisfactoriamente ")
                     access_token = solicitud.json().get("access_token", "")
                     refresh_token = solicitud.json().get("refresh_token", "")
-                    conexion = Conexion(refresh_token=refresh_token, access_token=access_token)
+                    conexion = Conexion(
+                        refresh_token=refresh_token, access_token=access_token)
                     self._cliente.guardar(object=conexion)
                 else:
-                    logging.error(" No se han podido renovar las credenciales ")
+                    logging.error(
+                        " No se han podido renovar las credenciales ")
             else:
-                logging.info(f" Las credenciales son válidas. La última fecha de conexión es {ultimo_registro.fecha_conexion} ")
-                
+                logging.info(
+                    f" Las credenciales son válidas. La última fecha de conexión es {ultimo_registro.fecha_conexion} ")
+
     def solicitud_post(self, datos: dict, encabezados: dict) -> Response:
         return requests.post(
             url=self.credenciales_url, data=datos, headers=encabezados)

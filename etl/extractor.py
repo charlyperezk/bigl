@@ -18,8 +18,9 @@ class Extractor:
     def __init__(self, cliente_meli: ClienteMeli) -> None:
         self._cliente_meli = cliente_meli
 
-    def extraer(self, query:str, encabezados: dict) -> json:
-        solicitud = self._cliente_meli.solicitud_get(query=query, encabezados=encabezados)
+    def extraer(self, query: str, encabezados: dict) -> json:
+        solicitud = self._cliente_meli.solicitud_get(
+            query=query, encabezados=encabezados)
         if solicitud.status_code == 200:
             logging.info(" Código de respuesta 200 -- Solicitud exitosa")
         else:

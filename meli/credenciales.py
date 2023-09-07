@@ -1,11 +1,8 @@
-import os
-
 from datetime import datetime
 
+from meli.variables import Variables
 from herramientas.tiempo import HerramientasDatetime as tiempo
 
-from dotenv import load_dotenv
-load_dotenv()
 
 
 class Credenciales:
@@ -18,14 +15,14 @@ class Credenciales:
 
     @classmethod
     def credenciales_conexion(self, reconexion: bool) -> dict:
-        id_cliente = os.getenv("CLIENT_ID")
-        cliente_secreto = os.getenv("CLIENT_SECRET")
-        url_redireccion = os.getenv("REDIRECT_URI")
-        code = os.getenv("CODE")
+        id_cliente = Variables.traer_variable("CLIENT_ID")
+        cliente_secreto = Variables.traer_variable("CLIENT_SECRET")
+        url_redireccion = Variables.traer_variable("REDIRECT_URI")
+        code = Variables.traer_variable("CODE")
         encabezados = {
-                "accept": "application/json",
-                "content-type": "application/x-www-form-urlencoded"
-            }
+            "accept": "application/json",
+            "content-type": "application/x-www-form-urlencoded"
+        }
         if reconexion is False:
             datos = {
                 "grant_type": "authorization_code",
@@ -43,7 +40,7 @@ class Credenciales:
                 "redirect_uri": f"{url_redireccion}"
             }
             return datos, encabezados
-    
+
     @classmethod
     def control_umbral(self, object) -> bool:
         t1 = object.fecha_conexion

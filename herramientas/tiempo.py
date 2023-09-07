@@ -8,6 +8,6 @@ class HerramientasDatetime:
         diferencia = diferencia.total_seconds()
         umbral = umbral * 60 * 60
         if diferencia > umbral:
-            return True            
+            return True
         else:
             return False

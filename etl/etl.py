@@ -1,7 +1,8 @@
 from base.cliente import ClienteBaseDeDatos
 from meli.cliente_meli import ClienteMeli
 from meli.administrador import AdministradorCredenciales
-from meli.filtrador_meli import Querys
+from meli.query import Query
+from meli.filtro import Filtros
 from etl.extractor import Extractor
 from etl.transformador import Transformador
 from etl.cargador import Cargador
@@ -29,27 +30,24 @@ class ETL:
         Distribución de los datos obtenidos. Ej: Exportar a csv.
     """
 
-    def __init__(self, cliente_bd: ClienteBaseDeDatos) -> None:
+    def __init__(self, cliente_bd: ClienteBaseDeDatos, filtro: Filtros) -> None:
         self._cliente_bd = cliente_bd
         self._cliente = ClienteMeli()
-        self._administrador = AdministradorCredenciales(self._cliente_bd)
+        self._administrador = AdministradorCredenciales(cliente=self._cliente_bd)
         self._extractor = Extractor(cliente_meli=self._cliente)
         self._transformador = Transformador()
         self._cargador = Cargador()
-
-    def consultas_disponibles(self) -> None:
-        consultas = ["Inmuebles por geolocalización"]
-        for e, i in enumerate(consultas):
-            print(" Consultas disponibles: ")
-            print (e+1, "--", i)
+        self._filtro = filtro
+        self._query = Query(filtros=self._filtro)
     
-    def consulta_inmuebles(self, lat1: str, lat2: str, long1: str, long2: str) -> list:
+    def consulta(self, mostrar: bool=False) -> list:
         logging.info(" Supervisando el estado de las credenciales ... ")
         self._administrador.supervisar()
         credencial = self._administrador.credencial()
         logging.info(" Realizando extracción ")
-        query = Querys.url_consulta_geolocalizacion(lat1=lat1, lat2=lat2, long1=long1, long2=long2)
-        solicitud = self._extractor.extraer(query=query, encabezados=credencial)
+        query = self._query.url()
+        solicitud = self._extractor.extraer(
+            query=query, encabezados=credencial)
         transformacion = self._transformador.transformar(response=solicitud)
         self._cargador.exportar_csv(respuesta_transformada=transformacion)
         return transformacion

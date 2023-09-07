@@ -1,4 +1,5 @@
 import pandas as pd
+from pandas import DataFrame
 
 import logging
 
@@ -11,10 +12,11 @@ class Cargador:
 
     """
 
-    def exportar_csv(self, respuesta_transformada: dict) -> None:
+    def exportar_csv(self, respuesta_transformada: dict) -> DataFrame:
         nombre = "datos.csv"
         directorio = f"exportados/{nombre}"
         df = pd.DataFrame(respuesta_transformada)
         df.to_csv(directorio, index=False)
         logging.info(f" Archivo exportado en la dirección {directorio} con el nombre {nombre} ")
+        return df
 
