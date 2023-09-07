@@ -1,6 +1,8 @@
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
+from herramientas.excepciones import BaseDeDatosError
+
 
 class ClienteBaseDeDatos:
     """
@@ -15,17 +17,26 @@ class ClienteBaseDeDatos:
         self._session = sesion
 
     def guardar(self, object) -> None:
-        self._session.add(object)
-        self._session.commit()
+        try:
+            self._session.add(object)
+            self._session.commit()
+        except:
+            raise BaseDeDatosError("Error al guardar.")
 
     def ultimo_registro(self, object):
-        data = self._session.query(object).order_by(object.id.desc()).first()
-        self.session_commit()
-        return data
-    
+        try:
+            data = self._session.query(object).order_by(object.id.desc()).first()
+            self.session_commit()
+            return data
+        except:
+            raise BaseDeDatosError("Error al consultar el último registro.")
+
     def registros(self, object):
-        data = self._session.query(object).all()
-        return data
+        try:
+            data = self._session.query(object).all()
+            return data
+        except:
+            raise BaseDeDatosError("Error al solicitar los registros.")
 
     def session_commit(self) -> None:
         self._session.commit()

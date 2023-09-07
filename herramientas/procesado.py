@@ -1,12 +1,19 @@
 class Procesador:
-
     """
     Procesador realiza un procesado de los resultados obtenidos en la solicitud, retornándolos en un formato amigable para ser analizados.
     Sin atributos
-
     """
 
     def _procesar_inmuebles(self, resultados: dict) -> list:
+        """
+        Procesa los resultados de inmuebles obtenidos en la solicitud y los transforma en una lista de diccionarios.
+
+        Args:
+            resultados (dict): Resultados de la solicitud a la API.
+
+        Returns:
+            list: Lista de diccionarios, donde cada diccionario representa un inmueble procesado.
+        """
         atributos_inmuebles = [
             ('HAS_AIR_CONDITIONING', 'aire_acondicionado'),
             ('HAS_TELEPHONE_LINE', 'linea_telefonica'),
