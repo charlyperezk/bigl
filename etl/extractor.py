@@ -34,7 +34,7 @@ class Extractor:
         solicitud = self._cliente_meli.solicitud_get(
             query=query, encabezados=encabezados)
         if solicitud.status_code == 200:
-            logging.info(" Código de respuesta 200 -- Solicitud exitosa")
+            logging.info("Código de respuesta 200 -- Solicitud exitosa")
         else:
             logging.error(f"Solicitud error - Codigo de respuesta: {solicitud.status_code}")
             raise SolicitudError(f"La solicitud ha arrojado código de respuesta {solicitud.status_code}")

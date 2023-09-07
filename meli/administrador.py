@@ -53,7 +53,7 @@ class AdministradorCredenciales:
                 logging.info("No se han encontrado registros de credenciales almacenados")
                 datos, encabezados = self._credenciales.credenciales_conexion(reconexion=False)
                 logging.info("Solicitando credenciales ...")
-                solicitud = self._cliente_meli.solicitud_post(datos=datos, encabezados=encabezados)
+                solicitud = self._cliente_meli.solicitud_post(url=self.credenciales_url, datos=datos, encabezados=encabezados)
                 if solicitud.status_code == 200:
                     logging.info("Se han obtenido las nuevas credenciales satisfactoriamente.")
                     access_token = solicitud.json().get("access_token", "")
@@ -65,16 +65,16 @@ class AdministradorCredenciales:
                     raise SolicitudError(f"No se obtuvieron las credenciales. Codigo de error de la request {solicitud.status_code}")
             else:
                 ultimo_registro = self._cliente.ultimo_registro(Conexion)
-                requiere_reconexion = self._credenciales.control_umbral(object=ultimo_registro)
+                requiere_reconexion = self._credenciales.control_umbral(conexion=ultimo_registro)
                 if requiere_reconexion == True:
                     refresh_token = ultimo_registro.refresh_token
                     logging.info("El último registro localizado requiere reconexion")
                     datos, encabezados = self._credenciales.credenciales_conexion(reconexion=True)
                     datos["refresh_token"] = refresh_token
                     logging.info("Reconectando ...")
-                    solicitud = self._cliente_meli.solicitud_post(datos=datos, encabezados=encabezados)
+                    solicitud = self._cliente_meli.solicitud_post(url=self.credenciales_url, datos=datos, encabezados=encabezados)
                     if solicitud.status_code == 200:
-                        logging.info(" Se han renovado las credenciales satisfactoriamente ")
+                        logging.info("Se han renovado las credenciales satisfactoriamente")
                         access_token = solicitud.json().get("access_token", "")
                         refresh_token = solicitud.json().get("refresh_token", "")
                         conexion = Conexion(refresh_token=refresh_token, access_token=access_token)

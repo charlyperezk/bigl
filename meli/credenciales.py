@@ -67,5 +67,5 @@ class Credenciales:
         """
         t1 = conexion.fecha_conexion
         ahora = datetime.now()
-        reconectar = tiempo.diferencia_umbral(t1, t2=ahora, umbral=4)
+        reconectar = tiempo.es_superado_umbral(t1, t2=ahora, umbral=4)
         return reconectar

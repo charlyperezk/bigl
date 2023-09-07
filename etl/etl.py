@@ -59,11 +59,11 @@ class ETL:
             self._cargador.exportar_csv(respuesta_transformada=transformacion)
             return transformacion
         except SolicitudError as e:
-            logging.error(f"Solicitud error - Mensaje: {e}")
+            logging.error(f"Solicitud error - Mensaje: '{e}'")
             return
         except ProcesadoError as e:
-            logging.error(f"Procesado error - Mensaje: {e}")
+            logging.error(f"Procesado error - Mensaje: '{e}'")
             return
-        except:
-            return
+        except Exception as e:
+            logging.error(F"Error no controlado. Mensaje: '{e}'")
 

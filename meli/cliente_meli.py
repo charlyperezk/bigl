@@ -26,9 +26,9 @@ class ClienteMeli:
             return requests.get(
                 url=query, headers=encabezados)
         except Exception as e:
-            raise SolicitudError("Error en la solicitud GET.") from e
+            raise SolicitudError(f"Error en la solicitud GET. Mensaje : '{e}'")
 
-    def solicitud_post(self, datos: dict, encabezados: dict) -> Response:
+    def solicitud_post(self, url: str, datos: dict, encabezados: dict) -> Response:
         """
         Realiza una solicitud POST a la API de Meli.
 
@@ -44,6 +44,6 @@ class ClienteMeli:
         """
         try:
             return requests.post(
-                url=self.credenciales_url, data=datos, headers=encabezados)
+                url=url, data=datos, headers=encabezados)
         except Exception as e:
-            raise SolicitudError("Error en la solicitud POST.") from e
+            raise SolicitudError(f"Error en la solicitud POST. Mensaje : '{e}'")
