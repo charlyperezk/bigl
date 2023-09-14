@@ -42,7 +42,6 @@ Además, configura las variables de entorno en el archivo `.env` con las credenc
 ## Tecnologías Utilizadas
 
 - Python
-- Flask
 - Requests
 - SQLAlchemy
 - Pandas
