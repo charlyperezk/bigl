@@ -31,9 +31,13 @@ Para utilizar Bigl, sigue estos pasos:
 
 2. Configura las credenciales de Mercado Libre en el archivo `.env`. Asegúrate de completar los valores de `CLIENT_ID`, `CLIENT_SECRET`, `CODE`, y `REDIRECT_URI`.
 
-3. Ejecuta la aplicación utilizando Python.
+3. Activa el entorno con env\Scripts\activate.
 
-4. Sigue las instrucciones en la consola para configurar tus filtros de búsqueda y obtener los resultados deseados.
+4. Ejecuta la aplicacion con python main.py
+
+5. Crea una base de datos desde la Config. Inicial (Opcion 1 del menú)
+
+6. Sigue las instrucciones en la consola para configurar tus filtros de búsqueda y obtener los resultados deseados.
 
 ## Configuración
 
