@@ -137,4 +137,6 @@ class Menu:
 
 if __name__ == "__main__":
     menu = Menu()
+    print("")
+    print("¡Bienvenido a Bigl!")
     menu.mostrar()
