@@ -1,7 +1,7 @@
 <h1 align="center"> Bigl | Integracion API Meli | Inmuebles </h1>
 
 <div align="center">
-  <img src="https://github.com/charlyperezk/meli_inmuebles/assets/118618975/1d8fb75a-46a6-43ac-89bb-ab3fa75022fc" alt="bigl" width="200">
+  <img src="https://github.com/charlyperezk/bigl/assets/118618975/9984ae1b-f532-4728-aef9-a4e6d381d0c9" alt="bigl" width="200">
 </div>
 
 ## Descripción
