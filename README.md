@@ -17,8 +17,11 @@ Bigl es una herramienta de integración que utiliza la API de Mercado Libre para
 
 ## Capturas de Pantalla
 
-![Captura de pantalla 1](URL_CAPTURA_PANTALLA_1)
-![Captura de pantalla 2](URL_CAPTURA_PANTALLA_2)
+![image](https://github.com/charlyperezk/bigl/assets/118618975/36a04ad4-3e61-4422-bab7-a2d947de7753)
+
+![image](https://github.com/charlyperezk/bigl/assets/118618975/effbdfab-b79e-419a-a94b-b0808ff31a0e)
+
+![image](https://github.com/charlyperezk/bigl/assets/118618975/cc6ef74d-a22a-48a6-b353-22b6896fa294)
 
 ## Uso
 
