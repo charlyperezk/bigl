@@ -11,6 +11,7 @@ class Filtros:
     """
 
     filtros_aplicados = []
+    filtros_disponibles = json.loads(Variables.traer_variable("FILTROS_DISPONIBLES"))
 
     @classmethod
     def _filtros(cls, mostrar: bool=False) -> json:
@@ -27,7 +28,7 @@ class Filtros:
             FiltroError: Si ocurre un error al obtener los filtros disponibles.
         """
         try:
-            filtros = json.loads(Variables.traer_variable("FILTROS_DISPONIBLES"))
+            filtros = cls.filtros_disponibles
             if mostrar:
                 print(f" Filtros de búsqueda disponibles: ")
                 print("")
@@ -36,7 +37,7 @@ class Filtros:
                 print("")
             return filtros
         except VariableError as e:
-            logging.error(f"Variable error - Mensaje: {e}")
+            logging.error(f"Variable error - Mensaje: {str(e)}")
         except:
             raise FiltroError("Error al mostrar los filtros disponibles. Estos se encuentran en FILTROS_DISPONIBLES del archivo .env.")
 
@@ -75,9 +76,9 @@ class Filtros:
             else:
                 return filtro
         except FiltroError as e:
-            logging.error(f"Filtro error - Mensaje: {e}")
+            logging.error(f"Filtro error - Mensaje: {str(e)}")
         except VariableError as e:
-            logging.error(f"Variable error - Mensaje: {e}")
+            logging.error(f"Variable error - Mensaje: {str(e)}")
         except:
             raise FiltroError("Error al mostrar las opciones de {nombre_filtro}. Estas se encuentran en el archivo .env.")
 
@@ -105,12 +106,15 @@ class Filtros:
             opcion_seleccionada = llaves_opciones[opcion]
             query = opciones_filtro["ID"].lower() + opciones_filtro[opcion_seleccionada]
             cls.filtros_aplicados.append(query)
+            for filtro in cls.filtros_disponibles:
+                if filtro == nombre_filtro:
+                    cls.filtros_disponibles.remove(filtro)
             print("")
-            print(" Se ha añadido el filtro exitosamente ")
+            logging.info("Se ha añadido el filtro exitosamente")
         except FiltroError as e:
-            logging.error(f"Filtro error - Mensaje: {e}")
+            logging.error(f"Filtro error - Mensaje: {str(e)}")
         except VariableError as e:
-            logging.error(f"Variable error - Mensaje: {e}")
+            logging.error(f"Variable error - Mensaje: {str(e)}")
 
     @classmethod
     def _seleccion(cls, mostrar: bool=False) -> list:
@@ -128,10 +132,8 @@ class Filtros:
         """
         seleccion = cls.filtros_aplicados
         if mostrar:
-            print("")
-            print(" Filtros aplicados: ")
+            logging.info("Consulta iniciada.")
+            print("Filtros Aplicados:")
             for filtro in seleccion:
-                print("")
-                print(f" - {filtro}")
-            print("")
+                print((f" - {filtro}"))
         return seleccion

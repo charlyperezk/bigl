@@ -85,6 +85,6 @@ class AdministradorCredenciales:
                 else:
                     logging.info(f"Las credenciales son válidas. La última fecha de conexión es {ultimo_registro.fecha_conexion}")
         except SolicitudError as e:
-            logging.error(f"Solicitud error - Mensaje: {e}")
+            logging.error(f"Solicitud error - Mensaje: {str(e)}")
         except BaseDeDatosError as e:
-            logging.error(f"Base de datos error - Mensaje: {e}")
+            logging.error(f"Base de datos error - Mensaje: {str(e)}")

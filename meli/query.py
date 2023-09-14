@@ -48,7 +48,7 @@ class Query:
             url = f"{url_base}?{query}"
             return url
         except FiltroError as e:
-            logging.error(f"Filtro error - Mensaje: {e}")
+            logging.error(f"Filtro error - Mensaje: {str(e)}")
         except Exception as e:
-            logging.error(f"URL error - Mensaje: {e}")
+            logging.error(f"URL error - Mensaje: {str(e)}")
             raise URLError("Ha habido un error al generar la URL para la solicitud.")

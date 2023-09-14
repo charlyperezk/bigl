@@ -28,6 +28,8 @@ class Cargador:
         df = pd.DataFrame(respuesta_transformada)
         df.to_csv(directorio, index=False)
         logging.info(f"Archivo exportado en la dirección {directorio} con el nombre {nombre}")
+        print("")
+        print(df)
         return df
 
 

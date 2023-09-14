@@ -100,7 +100,8 @@ class Menu:
                     usuario_ag_filtro = input("¿Desea agregar otro filtro? (1 = Si - 0 = No): ")
 
                     if usuario_ag_filtro != "1":
-                        self.filtro._seleccion(mostrar=True)
+                        # self.filtro._seleccion(mostrar=True)
+                        print("")
                         self.etl.consulta()
                         self.filtro.filtros_aplicados.clear()
                         break
