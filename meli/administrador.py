@@ -66,7 +66,7 @@ class AdministradorCredenciales:
             else:
                 ultimo_registro = self._cliente.ultimo_registro(Conexion)
                 requiere_reconexion = self._credenciales.control_umbral(conexion=ultimo_registro)
-                if requiere_reconexion == True:
+                if requiere_reconexion:
                     refresh_token = ultimo_registro.refresh_token
                     logging.info("El último registro localizado requiere reconexion")
                     datos, encabezados = self._credenciales.credenciales_conexion(reconexion=True)
