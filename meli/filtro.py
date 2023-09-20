@@ -6,8 +6,14 @@ import json
 class Filtros:
     """
     Filtros se encarga del manejo de filtros de búsqueda. Almacena la selección de filtros del usuario.
-    Pueden agregarse filtros a través del archivo .env
-    Sin atributos
+    Pueden agregarse filtros a través del archivo .env.
+
+    Atributos
+    ----------
+    filtros_aplicados: list
+        Lista que posee los filtros que ha seleccionado el usuario.
+    filtros_disponibles: list
+        Listado de filtros disponibles (filtros_disponibles en .env).
     """
 
     filtros_aplicados = []
