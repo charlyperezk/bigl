@@ -57,7 +57,7 @@ class ETL:
             solicitud = self._extractor.extraer(query=query, encabezados=credencial)
             transformacion = self._transformador.transformar(response=solicitud)
             self._cargador.exportar_csv(respuesta_transformada=transformacion)
-            return transformacion
+            #return transformacion
         except SolicitudError as e:
             logging.error(f"Solicitud error - Mensaje: {str(e)}")
             return
