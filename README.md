@@ -8,6 +8,20 @@
 
 Bigl es una herramienta de integración que utiliza la API de Mercado Libre para buscar y filtrar propiedades e inmuebles disponibles en su plataforma. Esta aplicación proporciona a los usuarios una forma eficiente de buscar propiedades según sus criterios específicos, como ubicación, tipo de propiedad y superficie cubierta.
 
+## Capturas
+
+### Menú y Filtrado:
+
+
+![Menu y filtros](https://github.com/charlyperezk/bigl/assets/118618975/7de0895b-20a0-4ab2-bcf1-0f70f4e1ecdf)
+
+
+### Logs y Resultados de Búsqueda
+
+
+![busqueda](https://github.com/charlyperezk/bigl/assets/118618975/61f07828-8391-43d8-9da4-446aca36f6e9)
+
+
 ## Características Clave
 
 - Búsqueda avanzada de inmuebles en Mercado Libre.
