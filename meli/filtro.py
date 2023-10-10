@@ -143,3 +143,9 @@ class Filtros:
             for filtro in seleccion:
                 print((f" - {filtro}"))
         return seleccion
+
+    def _reiniciar_filtros(cls):
+        """
+        Declara nuevamente el listado de filtros disponibles
+        """
+        cls.filtros_disponibles = json.loads(Variables.traer_variable("FILTROS_DISPONIBLES"))
