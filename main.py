@@ -33,6 +33,7 @@ class Menu:
                     self.configuracion_inicial()
                 elif seleccion_menu == 2:
                     self.realizar_consulta()
+                    self.filtro._reiniciar_filtros()
                 elif seleccion_menu == 3:
                     break
                 else:
