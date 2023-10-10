@@ -144,7 +144,7 @@ class Filtros:
                 print((f" - {filtro}"))
         return seleccion
 
-    def _reiniciar_filtros(cls):
+    def _reiniciar_filtros(cls) -> None:
         """
         Declara nuevamente el listado de filtros disponibles
         """
